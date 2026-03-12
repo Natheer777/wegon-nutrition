@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import './navbar.css';
 import logo from '../../assets/Asset 2@4x.png';
 import flag from '../../assets/Asset 3@4x.png';
+import { Link } from 'react-router-dom';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -43,9 +44,9 @@ export default function Navbar() {
         {/* Center: Desktop Nav Links */}
         <div className="nav-center">
           {navLinks.map((link) => (
-            <a key={link.title} href={link.href} className="nav-link">
+            <Link key={link.title} to={link.href} className="nav-link">
               {link.title}
-            </a>
+            </Link>
           ))}
         </div>
 
