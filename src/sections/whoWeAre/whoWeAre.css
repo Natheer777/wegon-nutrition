@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap');
+
+.who-we-are-section {
+  padding:  5%;
+  background-color: #ffffff;
+  font-family: 'Outfit', sans-serif;
+  overflow: hidden;
+  color: #444;
+}
+
+.who-we-are-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header Content Alignment */
+.header-wrapper {
+  
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 60px;
+}
+
+.who-we-are-section .header-text {
+  flex: 1;
+  text-align: start;
+}
+
+.title-container {
+  margin-bottom: 20px;
+}
+
+.who-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #00899b;
+  text-transform: uppercase;
+  margin: 0;
+  display: inline-block;
+  position: relative;
+}
+
+.who-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 80%;
+  height: 6px;
+  background-color: #00899b;
+}
+
+.who-description {
+  font-size: 1.4rem;
+  line-height: 1.6;
+  color: #00899b;
+  font-weight: 600;
+  max-width: 800px;
+}
+
+.who-logo {
+  width: 200px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Grid Layout */
+.who-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.grid-item {
+  position: relative;
+  border-radius: 4px;
+  /* Image looks sharp in design, subtle rounding if any */
+  overflow: hidden;
+  cursor: pointer;
+  aspect-ratio: 1 / 1;
+}
+
+.grid-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.item-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Subtle darkening for text legibility */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  transition: background-color 0.4s ease;
+}
+
+.item-text {
+  color: #ffffff;
+  font-size: 3rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+}
+
+/* Hover Effects */
+.grid-item:hover .grid-image {
+  transform: scale(1.08);
+}
+
+.grid-item:hover .item-overlay {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .who-title {
+    font-size: 2.8rem;
+  }
+
+  .who-description {
+    font-size: 1.2rem;
+  }
+
+  .who-logo {
+    width: 150px;
+  }
+
+  .item-text {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .header-wrapper {
+    /* flex-direction: column-reverse; */
+    align-items: center;
+    text-align: center;
+
+  }
+
+  .who-title::after {
+    left: 0;
+    width: 100%;
+    height: 2px;
+  }
+
+  .who-logo {
+    width: 120px;
+  }
+
+  .who-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .item-text {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .who-title {
+    font-size: 1.6rem;
+  }
+
+  .who-description {
+    font-size: 0.8rem;
+  }
+
+  .item-text {
+    font-size: 1.8rem;
+  }
+}

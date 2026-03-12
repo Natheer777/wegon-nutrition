@@ -1,0 +1,197 @@
+.master-section {
+  width: 100%;
+  background: #ffffff;
+  padding: 0px 20px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.master-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.master-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 40px;
+}
+
+/* Header Section */
+.master-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.master-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.1;
+  text-transform: uppercase;
+
+  /* Color Wave Effect */
+  background: linear-gradient(90deg,
+      #00a0b0 0%,
+      #00d4e7 25%,
+      #00a0b0 50%,
+      #00d4e7 75%,
+      #00a0b0 100%);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: colorWave 4s linear infinite;
+  display: inline-block;
+}
+
+.master-subtitle {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(2rem, 6.5vw, 4rem);
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.1;
+  text-transform: uppercase;
+
+  /* Color Wave Effect on Stroke/Fill */
+  background: linear-gradient(90deg,
+      #00a0b0 0%,
+      #00d4e7 25%,
+      #00a0b0 50%,
+      #00d4e7 75%,
+      #00a0b0 100%);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-stroke: 1px rgba(0, 160, 176, 0.3);
+  animation: colorWave 4s linear infinite;
+  display: inline-block;
+  opacity: 0.9;
+}
+
+/* Description */
+.master-description-wrapper {
+  max-width: 90%;
+  width: 1000px;
+}
+
+.master-description {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(0.95rem, 2.5vw, 1.25rem);
+  line-height: 1.6;
+  color: #00a0b0;
+  font-weight: 500;
+  margin: 0;
+  text-wrap: balance;
+}
+
+/* Why Section Title */
+.master-why-title {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 20px;
+}
+
+.master-why-title h2 {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(1.8rem, 5vw, 3.5rem);
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.2;
+  text-transform: uppercase;
+
+  /* Color Wave Effect */
+  background: linear-gradient(90deg,
+      #00a0b0 0%,
+      #00d4e7 25%,
+      #00a0b0 50%,
+      #00d4e7 75%,
+      #00a0b0 100%);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: colorWave 4s linear infinite;
+  display: inline-block;
+}
+
+@keyframes colorWave {
+  0% {
+    background-position: 0% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* Product Section */
+.master-product-section {
+  width: 100%;
+  position: relative;
+  margin-top: 20px;
+}
+
+.master-section .product-image-container {
+  position: relative;
+  background-color: transparent !important;
+  width: 100%;
+  height: 72vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-image-composition {
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  display: block;
+}
+
+/* Ambient glow effect */
+.product-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  height: 40%;
+  background: radial-gradient(circle, rgba(0, 160, 176, 0.1) 0%, transparent 70%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Responsive adjustments for Tablet/Desktop spacing */
+@media (min-width: 768px) {
+  .master-content {
+    gap: 60px;
+  }
+
+  .master-why-title {
+    margin-top: 40px;
+  }
+
+  .master-product-section {
+    margin-top: 40px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .master-section {
+    padding: 120px 40px;
+  }
+
+  .master-content {
+    gap: 70px;
+  }
+}

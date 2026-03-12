@@ -1,0 +1,8 @@
+export { default as Header } from './header/header'
+export { default as Navbar } from './navbar/navbar'
+export { default as WhoWeAre } from './whoWeAre/whoWeAre'
+export { default as TopSellers } from './topSellers/topSellers'
+export { default as Master } from './master/master'
+export { default as Touch } from './touch/touch'
+export { default as Review } from './review/review'
+export { default as Footer } from './footer/Footer'

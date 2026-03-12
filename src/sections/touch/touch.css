@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Montserrat:wght@400;500;600&display=swap');
+
+.touch-section {
+  padding: 80px 20px;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.touch-card {
+  background: white;
+  border: 1.5px solid #009eb3;
+  border-radius: 20px;
+  padding: 40px 60px;
+  max-width: 900px;
+  width: 100%;
+}
+
+.touch-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.touch-title {
+  font-family: 'Oswald', 'Inter', sans-serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #009eb3;
+  margin-bottom: 5px;
+  letter-spacing: -1px;
+}
+
+.touch-subtitle {
+  font-family: 'Montserrat', 'Inter', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #009eb3;
+  line-height: 1.3;
+  max-width: 600px;
+  margin: 0 auto;
+  text-transform: uppercase;
+}
+
+.touch-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-field label {
+  font-family: 'Oswald', 'Inter', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #009eb3;
+  text-transform: uppercase;
+}
+
+.form-field input,
+.form-field textarea {
+  border: 1.5px solid #009eb3;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-size: 1.1rem;
+  color: #333;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  box-shadow: 0 0 0 4px rgba(0, 158, 179, 0.1);
+}
+
+.submit-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.touch-submit-btn {
+  background-color: #009eb3;
+  color: white;
+  border: none;
+  padding: 12px 60px;
+  border-radius: 50px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background-color 0.2s ease;
+}
+
+.touch-submit-btn:hover {
+  background-color: #00899b;
+}
+
+/* Success Message Styles */
+.success-container {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.success-container h2 {
+  color: #009eb3;
+  font-family: 'Oswald', sans-serif;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .touch-card {
+    padding: 30px 20px;
+    border-radius: 15px;
+  }
+
+  .touch-title {
+    font-size: 2.5rem;
+  }
+
+  .touch-subtitle {
+    font-size: 1rem;
+  }
+
+  .form-field label {
+    font-size: 1.3rem;
+  }
+
+  .touch-submit-btn {
+    font-size: 1.4rem;
+    width: 100%;
+    padding: 10px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .touch-card {
+    padding: 50px 80px;
+  }
+}

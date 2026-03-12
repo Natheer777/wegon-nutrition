@@ -1,0 +1,217 @@
+:root {
+  --primary-teal: #1592A4;
+  --accent-red: #A32024;
+  --white: #ffffff;
+  --text-dark: #333333;
+  --transition: all 0.3s ease;
+}
+
+.navbar-container {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  font-family: 'Outfit', 'Inter', sans-serif;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  animation: fadeInDown 0.8s ease-out;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar-container.scrolled {
+  transform: translateY(-40px);
+  /* Exactly the height of the announcement bar */
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.announcement-bar {
+  background-color: var(--white);
+  color: var(--accent-red);
+  text-align: center;
+  padding: 8px 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-bottom: 5px solid white;
+  height: 40px;
+  /* Fixed height for reliable transform */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* We remove the max-height animation to avoid "jumping" with the transform */
+.navbar-container.scrolled .announcement-bar {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.main-nav {
+  background-color: var(--primary-teal);
+  padding: 12px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  transition: all 0.4s ease;
+}
+
+.navbar-container.scrolled .main-nav {
+  background-color: rgba(21, 146, 164, 0.95);
+  backdrop-filter: blur(8px);
+  height: 60px;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 45px;
+  width: auto;
+  cursor: pointer;
+}
+
+.nav-center {
+  display: none;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.flag-icon {
+  height: 24px;
+  width: auto;
+  cursor: pointer;
+  transition: var(--transition);
+  border-radius: 2px;
+}
+
+.flag-icon:hover {
+  transform: scale(1.1);
+}
+
+.burger-menu {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: block;
+  padding: 5px;
+  transition: var(--transition);
+}
+
+.burger-menu:hover {
+  transform: scale(1.1);
+}
+
+.burger-line {
+  display: block;
+  width: 25px;
+  height: 2px;
+  background-color: var(--white);
+  margin: 5px 0;
+  border-radius: 2px;
+  transition: var(--transition);
+}
+
+.burger-menu.active .burger-line:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.burger-menu.active .burger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.burger-menu.active .burger-line:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Desktop Styles */
+@media (min-width: 1024px) {
+  .nav-center {
+    display: flex;
+    gap: 40px;
+  }
+
+  .nav-link {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    text-transform: uppercase;
+    transition: var(--transition);
+    position: relative;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--white);
+    transition: var(--transition);
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  .burger-menu {
+    display: none;
+  }
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--primary-teal);
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.mobile-nav-link {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.close-menu {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 2rem;
+  cursor: pointer;
+}
