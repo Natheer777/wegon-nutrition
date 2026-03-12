@@ -106,7 +106,7 @@
   cursor: pointer;
 }
 
-.product-image-container {
+.top-sellers-container .product-image-container {
   width: 100%;
   aspect-ratio: 1 / 1.1;
   background-color: #f9f9f9;

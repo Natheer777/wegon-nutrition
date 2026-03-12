@@ -158,6 +158,19 @@
     text-transform: uppercase;
     transition: var(--transition);
     position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .link-icon {
+    display: flex;
+    align-items: center;
+    transition: var(--transition);
+  }
+
+  .nav-link:hover .link-icon {
+    transform: translateY(-2px);
   }
 
   .nav-link::after {
@@ -203,6 +216,16 @@
   font-size: 1.8rem;
   font-weight: 700;
   text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.mobile-link-icon {
+  display: flex;
+  align-items: center;
+  opacity: 0.8;
 }
 
 .close-menu {
