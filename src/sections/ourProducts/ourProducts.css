@@ -86,11 +86,12 @@
 .our-product-card {
   display: flex;
   flex-direction: column;
-  border: 2px solid var(--color-main, #009dac);
-  border-radius: 0;
+  border: 1px solid rgba(0, 157, 172, 0.15); /* More subtle border */
+  border-radius: 16px; /* Rounded corners */
   overflow: hidden;
   background-color: #fff;
-  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04); /* Subtle default shadow */
+  transition: border-color 0.3s ease;
 }
 
 .our-product-image-wrapper {
@@ -99,24 +100,38 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
+  background-color: #fcfcfc; /* Off-white to distinguish from card */
   overflow: hidden;
+  position: relative;
+}
+
+.our-product-image-wrapper::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 20%;
+  background: linear-gradient(to top, rgba(0,0,0,0.03), transparent);
+  pointer-events: none;
 }
 
 .our-product-image-wrapper img {
   width: 80%;
   height: 80%;
   object-fit: contain;
-  transition: transform 0.4s ease;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy hover */
+  z-index: 1;
 }
 
 .our-product-info {
   text-align: center;
-  padding: 15px 10px;
+  padding: 20px 15px; /* Better spacing */
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 5px;
 }
 
 .our-product-name {
@@ -131,32 +146,37 @@
 
 .our-product-bio {
   font-family: 'Montserrat', sans-serif;
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--color-main, #009dac);
-  margin: 5px 0 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #666; /* Softer text color for contrast */
+  margin: 0;
   text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .read-more-btn {
-  width: 100%;
-  padding: 15px;
-  background-color: var(--color-main, #009dac);
-  color: #fff;
+  width: calc(100% - 30px);
+  margin: 0 15px 15px;
+  padding: 12px;
+  background-color: transparent;
+  color: var(--color-main, #009dac);
+  border: 2px solid var(--color-main, #009dac);
+  border-radius: 8px; /* Sleek inner button */
   font-family: 'Oswald', sans-serif;
-  font-size: 1.5rem;
-  font-weight: 500;
-  border: none;
+  font-size: 1.3rem;
+  font-weight: 600;
   cursor: pointer;
-  text-transform: lowercase;
+  text-transform: uppercase;
   letter-spacing: 1px;
-  transition: background-color 0.3s ease;
-  margin-top: auto;
+  transition: all 0.3s ease;
 }
 
-.read-more-btn:hover {
-  background-color: #007d8a;
+.our-product-card:hover .read-more-btn {
+  background-color: var(--color-main, #009dac);
+  color: #fff;
+  transform: translateY(-2px);
 }
+
 
 /* Responsive Styles */
 @media (max-width: 768px) {

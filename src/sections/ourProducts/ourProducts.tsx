@@ -52,6 +52,17 @@ export default function OurProducts() {
         fetchProducts()
     }, [])
 
+    useEffect(() => {
+        const handleCategoryChange = (e: Event) => {
+            const customEvent = e as CustomEvent;
+            if (categories.includes(customEvent.detail)) {
+                setActiveCategory(customEvent.detail);
+            }
+        };
+        window.addEventListener('changeProductCategory', handleCategoryChange);
+        return () => window.removeEventListener('changeProductCategory', handleCategoryChange);
+    }, []);
+
     const filteredProducts = allProducts.filter(
         (product) => product.category_name === activeCategory
     )

@@ -1,10 +1,11 @@
-import { Footer, Header, Navbar } from "../../sections";
+import { Footer, Navbar, Review, Touch } from "../../sections";
 
 export default function Contact() {
   return (
     <>
     <Navbar />
-    <Header />
+    <Touch />
+    <Review />
     <Footer />
     </>
   )

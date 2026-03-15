@@ -16,10 +16,10 @@ import imgTop6 from '../../assets/Asset 22@2x.png'
 const products = [
   { id: 1, name: 'ISO PROTEIN', subtitle: 'PURE ISOLATE WHEY', image: imgTop1 },
   { id: 2, name: 'WHEY PROTEIN', subtitle: '100% WHEY PROTEIN', image: imgTop2 },
-  { id: 3, name: 'ISO PROTEIN', subtitle: 'PURE ISOLATE WHEY', image: imgTop3 },
-  { id: 4, name: 'WHEY PROTEIN', subtitle: '100% WHEY PROTEIN', image: imgTop4 },
-  { id: 5, name: 'ISO PROTEIN', subtitle: 'PURE ISOLATE WHEY', image: imgTop5 },
-  { id: 6, name: 'WHEY PROTEIN', subtitle: '100% WHEY PROTEIN', image: imgTop6 }
+  { id: 3, name: 'CREATINE MONOHYDRATE', subtitle: '100% CREATINE MONOHYDRATE', image: imgTop3 },
+  { id: 4, name: 'GLUTA POWDER', subtitle: '100% PURE L-GLUTAMINE', image: imgTop4 },
+  { id: 5, name: 'MULTI VITAMINS', subtitle: 'DAILY ENERGY BOOST', image: imgTop5 },
+  { id: 6, name: 'Omega-3', subtitle: 'FISH OIL SUPPLEMENT', image: imgTop6 }
 ]
 
 export default function TopSellers() {
