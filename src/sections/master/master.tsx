@@ -1,5 +1,5 @@
 import './master.css'
-import masterimg from '../../assets/Asset 24@2x.png'
+import masterimg from '../../assets/new1.png'
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'

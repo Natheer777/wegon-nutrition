@@ -1,0 +1,329 @@
+/* Font Imports */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+.details-wrapper-bg {
+    background-color: #f7f9fa; /* Slight off-white if needed, or white */
+}
+
+.details-section {
+    padding: 40px 20px 80px;
+    background-color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    color: #333;
+    display: flex;
+    justify-content: center;
+}
+
+.details-container {
+    width: 100%;
+    max-width: 800px; /* Keep it relatively contained like a mobile view but responsive */
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Loading & Error */
+.details-loading, .details-error {
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.5rem;
+    color: #00a0b0;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(0, 160, 176, 0.2);
+    border-top: 4px solid #00a0b0;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Image Wrapper */
+.details-image-wrapper {
+    width: 100%;
+    aspect-ratio: 1/1;
+    background-color: #e5e5e5; /* The grey placeholder background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.details-product-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.details-image-placeholder {
+    font-family: 'Oswald', sans-serif;
+    color: #aaa;
+    font-size: 1.2rem;
+}
+
+/* Content Area */
+.details-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Header Row (Title & Weight) */
+.details-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 2px solid transparent; /* Gives a slight spacing */
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.details-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(2rem, 6vw, 2.5rem);
+    font-weight: 800;
+    color: #129b9f; /* Teal color from image */
+    margin: 0;
+    text-transform: uppercase;
+    line-height: 1;
+}
+
+.details-weight {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 700;
+    color: #129b9f;
+    margin: 0;
+    line-height: 1;
+}
+
+/* Flavors Row */
+.details-flavors-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.details-flavors-label {
+    background-color: #129b9f;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    padding: 6px 12px;
+    font-size: 0.95rem;
+    text-transform: capitalize;
+}
+
+.details-flavors-select-wrapper {
+    display: flex;
+    align-items: center;
+    background-color: #129b9f;
+    color: white;
+    padding: 6px 12px;
+    gap: 5px;
+}
+
+.details-flavors-select {
+    background: transparent;
+    border: none;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    outline: none;
+    cursor: pointer;
+    text-transform: capitalize;
+    appearance: none; /* remove default arrow to style our own if needed, but keeping simple for now */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-right: 5px;
+}
+
+.details-flavors-select option {
+    background-color: #ffffff;
+    color: #333;
+}
+
+.flavors-count {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+/* Need custom arrow for dropdown if appearance is none */
+.details-flavors-select-wrapper::after {
+    content: "v"; /* simple arrow */
+    font-family: sans-serif;
+    font-size: 0.8rem;
+    pointer-events: none;
+    transform: scaleX(1.5) scaleY(0.8);
+    display: inline-block;
+}
+
+/* Card Layout & Styles */
+.details-cards-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.details-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 160, 176, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: all 0.3s ease;
+}
+
+.warnings-card {
+    border: 1px solid rgba(209, 58, 58, 0.15);
+    background: #fffafa; /* Very subtle red tint */
+}
+
+/* Columns Info (Inside Card) */
+.details-info-columns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.info-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.info-column:last-child {
+    padding-left: 20px;
+}
+
+.info-column:first-child {
+    padding-right: 20px;
+}
+
+.info-column-divider {
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, rgba(0, 160, 176, 0.4), transparent);
+    flex-shrink: 0;
+    min-height: 100%;
+}
+
+.info-column-title {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(1.1rem, 3.5vw, 1.3rem);
+    font-weight: 800;
+    color: #129b9f;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.info-column-text {
+    font-size: clamp(0.9rem, 2.5vw, 0.95rem);
+    color: #555;
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+/* Text Sections (Inside Card) */
+.section-heading {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(1.4rem, 4vw, 1.8rem);
+    font-weight: 700;
+    color: #129b9f;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-heading::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, rgba(0, 160, 176, 0.3), transparent);
+}
+
+.warnings-heading {
+    color: #d13a3a;
+}
+.warnings-heading::after {
+    background: linear-gradient(to right, rgba(209, 58, 58, 0.3), transparent);
+}
+
+.section-body {
+    font-size: clamp(0.95rem, 2.8vw, 1.05rem);
+    color: #555;
+    line-height: 1.7;
+    margin: 0;
+    font-weight: 500;
+}
+
+/* Responsive fixes */
+@media (max-width: 480px) {
+    .details-info-columns {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .info-column-divider {
+        width: 100%;
+        height: 2px;
+        min-height: auto;
+    }
+    
+    .info-column:last-child,
+    .info-column:first-child {
+        padding: 0;
+    }
+
+    .details-flavors-row {
+        gap: 5px;
+    }
+    
+    .details-flavors-label, .details-flavors-select-wrapper {
+        font-size: 0.85rem;
+        padding: 6px 8px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .details-container {
+        flex-direction: row;
+        max-width: 1200px;
+        gap: 50px;
+        align-items: flex-start;
+    }
+    
+    .details-image-wrapper {
+        flex: 1;
+        position: sticky;
+        top: 120px;
+    }
+    
+    .details-content {
+        flex: 1;
+    }
+}

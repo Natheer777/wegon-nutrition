@@ -1,4 +1,4 @@
-import { Header, Master, Navbar, TopSellers, Touch, WhoWeAre, Review, Footer } from '../../sections'
+import { Header, Master, Navbar, TopSellers, Touch, WhoWeAre, Review, Footer, OurProducts, Permiume } from '../../sections'
 import { ScrollReveal } from '../../components/ScrollReveal'
 
 export default function home() {
@@ -17,7 +17,12 @@ export default function home() {
       <ScrollReveal>
         <TopSellers />
       </ScrollReveal>
-
+      <ScrollReveal>
+        <OurProducts />
+      </ScrollReveal>
+      <ScrollReveal>
+        <Permiume />
+      </ScrollReveal>
       <ScrollReveal>
         <Master />
       </ScrollReveal>
