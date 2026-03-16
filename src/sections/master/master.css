@@ -14,6 +14,33 @@
   margin: 0 auto;
 }
 
+.master-top-image-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.master-top-image {
+  width: 100%;
+  max-width: 400px; /* Adjusting size to be prominent but not overwhelming */
+  height: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .master-top-image {
+    max-width: 100%;
+  }
+  
+  .master-top-image-wrapper {
+    margin-left: -20px;
+    margin-right: -20px;
+    width: calc(100% + 40px);
+    margin-bottom: 20px;
+  }
+}
+
 .master-content {
   display: flex;
   flex-direction: column;

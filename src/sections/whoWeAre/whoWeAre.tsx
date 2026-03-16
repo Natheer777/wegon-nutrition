@@ -6,6 +6,7 @@ import imgWho3 from '../../assets/Asset 15@2x.png'
 import imgWho4 from '../../assets/Asset 16@2x.png'
 import { motion, useInView } from 'framer-motion'
 import { useState, useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const TypingText = ({ text, className }: { text: string, className?: string }) => {
   const [displayedText, setDisplayedText] = useState('')
@@ -55,29 +56,34 @@ const TypingText = ({ text, className }: { text: string, className?: string }) =
   )
 }
 
-const gridItems = [
+interface GridItem {
+  image: string;
+  targetId?: string;
+  navigateTo?: string;
+  categoryTarget?: string;
+}
+
+const gridItems: GridItem[] = [
   {
     image: imgWho1,
     targetId: 'top-sellers'
   },
   {
     image: imgWho2,
-    targetId: 'products',
-    categoryTarget: 'PROTEINS'
+    navigateTo: '/product/6'
   },
   {
     image: imgWho3,
-    targetId: 'products',
-    categoryTarget: 'RECOVERY'
+    navigateTo: '/product/9'
   },
   {
     image: imgWho4,
-    targetId: 'products',
-    categoryTarget: 'PROTEINS'
+    navigateTo: '/product/5'
   }
 ]
 
 export default function WhoWeAre() {
+  const navigate = useNavigate()
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -178,14 +184,18 @@ export default function WhoWeAre() {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => {
-                if (item.categoryTarget) {
-                  window.dispatchEvent(new CustomEvent('changeProductCategory', { detail: item.categoryTarget }));
-                }
-                if (item.targetId) {
-                  document.getElementById(item.targetId)?.scrollIntoView({ behavior: 'smooth' });
+                if (item.navigateTo) {
+                  navigate(item.navigateTo);
+                } else {
+                  if (item.categoryTarget) {
+                    window.dispatchEvent(new CustomEvent('changeProductCategory', { detail: item.categoryTarget }));
+                  }
+                  if (item.targetId) {
+                    document.getElementById(item.targetId)?.scrollIntoView({ behavior: 'smooth' });
+                  }
                 }
               }}
-              style={item.targetId ? { cursor: 'pointer' } : undefined}
+              style={(item.targetId || item.navigateTo || item.categoryTarget) ? { cursor: 'pointer' } : undefined}
             >
               <img src={item.image} className="grid-image" />
               <div className="item-overlay">

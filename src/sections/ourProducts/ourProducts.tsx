@@ -64,7 +64,7 @@ export default function OurProducts() {
     }, []);
 
     const filteredProducts = allProducts.filter(
-        (product) => product.category_name === activeCategory
+        (product) => product.category_name === activeCategory && product.unique_img
     )
 
     return (

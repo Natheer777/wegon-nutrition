@@ -47,6 +47,41 @@
     font-weight: 500;
 }
 
+/* Filters Section */
+.ap-filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.ap-filter-btn {
+    padding: 10px 25px;
+    background-color: transparent;
+    border: 2px solid #00a0b0;
+    color: #00a0b0;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 30px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    letter-spacing: 0.5px;
+}
+
+.ap-filter-btn:hover {
+    background-color: rgba(0, 160, 176, 0.05);
+    transform: translateY(-2px);
+}
+
+.ap-filter-btn.active {
+    background-color: #00a0b0;
+    color: #ffffff;
+    box-shadow: 0 5px 15px rgba(0, 160, 176, 0.3);
+}
+
 /* Container & Grid */
 .all-products-container {
     max-width: 1400px;

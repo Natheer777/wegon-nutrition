@@ -26,8 +26,11 @@ interface ProductResponse {
   flavors: Flavor[];
 }
 
+const categories = ["ALL", "PROTEINS", "RECOVERY", "VITAMINS", "ENERGY"];
+
 export default function AllProducts() {
   const [products, setProducts] = useState<ProductResponse[]>([]);
+  const [activeCategory, setActiveCategory] = useState<string>("ALL");
   const [loading, setLoading] = useState<boolean>(true);
   const navigate = useNavigate();
 
@@ -49,6 +52,30 @@ export default function AllProducts() {
     fetchAllProducts();
   }, []);
 
+  const getScaleFromWeight = (weight: string) => {
+    if (!weight) return 1;
+    
+    // استخراج الرقم من النص (مثلاً "2.27KG" تصبح 2.27)
+    const numericWeight = parseFloat(weight);
+    if (isNaN(numericWeight)) return 1;
+
+    // تحويل كل الأوزان لجرام لتوحيد المقارنة
+    const isKg = weight.toLowerCase().includes('kg');
+    const grams = isKg ? numericWeight * 1000 : numericWeight;
+
+    // تحديد النطاق: أصغر وزن 300 جرام وأكبر وزن 5000 جرام
+    // السكيل سيتراوح بين 0.7 للعلب الصغيرة و 1.05 للكبيرة جداً
+    const minGrams = 300;
+    const maxGrams = 5000;
+    const minScale = 0.8;
+    const maxScale = 2;
+
+    let scale = minScale + ((grams - minGrams) * (maxScale - minScale) / (maxGrams - minGrams));
+    
+    // حصر القيمة بين مينيوم وماكسيموم لضمان جمالية التصميم
+    return Math.min(Math.max(scale, 0.65), 1.1);
+  };
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { 
@@ -56,6 +83,10 @@ export default function AllProducts() {
       transition: { staggerChildren: 0.1, delayChildren: 0.2 } 
     }
   };
+
+  const filteredProducts = activeCategory === "ALL" 
+    ? products 
+    : products.filter(product => product.category_name === activeCategory);
 
   const itemVariants = {
     hidden: { opacity: 0, scale: 0.9, y: 30 },
@@ -89,6 +120,18 @@ export default function AllProducts() {
       </div>
 
       <div className="all-products-container">
+        <div className="ap-filters">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              className={`ap-filter-btn ${activeCategory === cat ? 'active' : ''}`}
+              onClick={() => setActiveCategory(cat)}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
         {loading ? (
           <div className="ap-loading-state">
             <div className="ap-spinner"></div>
@@ -101,9 +144,11 @@ export default function AllProducts() {
             initial="hidden"
             animate="visible"
           >
-            <AnimatePresence>
-              {products.map((product) => {
+            <AnimatePresence mode='popLayout'>
+              {filteredProducts.map((product) => {
                 const imgSource = product.unique_img || (product.flavors && product.flavors.length > 0 ? product.flavors[0].img_url : '');
+
+                const baseScale = getScaleFromWeight(product.weight);
 
                 return (
                   <motion.div 
@@ -119,8 +164,10 @@ export default function AllProducts() {
                           src={imgSource} 
                           alt={product.name}
                           className="ap-image"
+                          initial={{ scale: baseScale }}
+                          animate={{ scale: baseScale }}
                           variants={{
-                            hover: { scale: 1.08, transition: { duration: 0.4 } }
+                            hover: { scale: baseScale * 1.08, transition: { duration: 0.4 } }
                           }}
                         />
                       ) : (

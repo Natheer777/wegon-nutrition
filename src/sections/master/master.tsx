@@ -1,4 +1,5 @@
 import './master.css'
+import imageTopMaster from '../../assets/Asset 23@4x.png'
 import masterimg from '../../assets/new1.png'
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
@@ -26,7 +27,7 @@ export default function Master() {
       y: 0,
       transition: {
         duration: 0.8,
-        ease: [0.22, 1, 0.36, 1] // Custom cubic-bezier for premium feel
+        ease: [0.22, 1, 0.36, 1] 
       }
     }
   }
@@ -43,6 +44,15 @@ export default function Master() {
   return (
     <section className="master-section" ref={ref} id="master">
       <div className="master-container">
+        <motion.div 
+          className="master-top-image-wrapper"
+          variants={itemVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
+          <img src={imageTopMaster} alt="Master Top" className="master-top-image" />
+        </motion.div>
+
         <motion.div
           className="master-content"
           variants={containerVariants}
