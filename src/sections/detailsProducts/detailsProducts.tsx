@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, EffectFade } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/effect-fade';
 import './detailsProducts.css';
 
 interface Flavor {
@@ -68,6 +72,28 @@ export default function DetailsProducts() {
     fetchProductDetails();
   }, [id]);
 
+  const getScaleFromWeight = (weight: string) => {
+    if (!weight) return 1;
+
+    // استخراج الرقم من النص (مثلاً "2.27KG" تصبح 2.27)
+    const numericWeight = parseFloat(weight);
+    if (isNaN(numericWeight)) return 1;
+
+    // تحويل كل الأوزان لجرام لتوحيد المقارنة
+    const isKg = weight.toLowerCase().includes('kg');
+    const grams = isKg ? numericWeight * 1000 : numericWeight;
+
+    // تحديد النطاق: أصغر وزن 300 جرام وأكبر وزن 5000 جرام
+    // السكيل سيتراوح بين 0.65 للعلب الصغيرة و 1.2 للكبيرة جداً
+    const minGrams = 300;
+    const minScale = 0.8;
+
+    let scale = minScale + ((grams - minGrams) * (1.2) / (4700));
+
+    // حصر القيمة بين مينيوم وماكسيموم لضمان جمالية التصميم
+    return Math.min(Math.max(scale, 0.65), 1.2);
+  };
+
   if (loading) {
     return (
       <div className="details-loading">
@@ -113,15 +139,48 @@ export default function DetailsProducts() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          {currentImageUrl ? (
-            <img 
-              src={currentImageUrl} 
-              alt={product.name} 
-              className="details-product-img"
-              key={currentImageUrl} // Forces unmount/remount to trigger transition if needed or just handle via CSS
-            />
+          {product.flavors && product.flavors.length > 0 ? (
+            <Swiper
+              modules={[Autoplay, EffectFade]}
+              effect="fade"
+              fadeEffect={{ crossFade: true }}
+              autoplay={{
+                delay: 3000,
+                disableOnInteraction: false,
+              }}
+              loop={true}
+              className="details-product-swiper"
+            >
+              {product.flavors.map((flavor, index) => {
+                const baseScale = getScaleFromWeight(product.weight);
+                return (
+                  <SwiperSlide key={`${product.id}-${index}`}>
+                    <motion.img 
+                      src={flavor.img_url} 
+                      alt={`${product.name} - ${flavor.flavor_name}`} 
+                      className="details-product-img"
+                      initial={{ scale: baseScale * 0.9, opacity: 0 }}
+                      animate={{ scale: baseScale, opacity: 1 }}
+                      transition={{ duration: 0.5, ease: "easeOut" }}
+                    />
+                  </SwiperSlide>
+                );
+              })}
+            </Swiper>
           ) : (
-            <div className="details-image-placeholder">No Image Available</div>
+            currentImageUrl ? (
+              <motion.img 
+                src={currentImageUrl} 
+                alt={product.name} 
+                className="details-product-img"
+                key={currentImageUrl}
+                initial={{ scale: getScaleFromWeight(product.weight) * 0.9, opacity: 0 }}
+                animate={{ scale: getScaleFromWeight(product.weight), opacity: 1 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+              />
+            ) : (
+              <div className="details-image-placeholder">No Image Available</div>
+            )
           )}
         </motion.div>
 
@@ -150,8 +209,8 @@ export default function DetailsProducts() {
             <span className="details-weight">{product.weight || product.bio_for_ourProducts}</span>
           </motion.div>
 
-          {/* Flavors Row */}
-          {product.flavors && product.flavors.length > 0 && (
+          {/* Flavors Row - Hidden for VITAMINS as requested */}
+          {product.category_name !== "VITAMINS" && product.flavors && product.flavors.length > 0 && (
             <motion.div 
               className="details-flavors-row"
               variants={{

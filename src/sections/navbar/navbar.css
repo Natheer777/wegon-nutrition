@@ -193,48 +193,109 @@
   }
 }
 
-/* Mobile Menu Overlay */
-.mobile-menu-overlay {
+/* Mobile Menu Side Drawer */
+.mobile-menu-backdrop {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
-  background-color: var(--primary-teal);
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
   z-index: 1001;
+}
+
+.mobile-menu-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 280px;
+  height: 100vh;
+  background-color: var(--white);
+  z-index: 1002;
   display: flex;
   flex-direction: column;
-  padding: 40px;
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.15);
+  padding: 0;
+}
+
+.drawer-header {
+  padding: 25px 20px;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  gap: 30px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.drawer-logo {
+  height: 50px;
+  width: auto;
+}
+
+.drawer-close {
+  background: none;
+  border: none;
+  font-size: 2.5rem;
+  color: var(--primary-teal);
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+}
+
+.drawer-links {
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex-grow: 1;
 }
 
 .mobile-nav-link {
-  color: var(--white);
+  color: var(--text-dark);
   text-decoration: none;
-  font-size: 1.8rem;
-  font-weight: 700;
+  font-size: 1.1rem;
+  font-weight: 600;
   text-transform: uppercase;
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 15px;
+  padding: 12px 15px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.mobile-nav-link:hover {
+  background-color: rgba(21, 146, 164, 0.08);
+  color: var(--primary-teal);
+  transform: translateX(5px);
 }
 
 .mobile-link-icon {
   display: flex;
   align-items: center;
-  opacity: 0.8;
+  color: var(--primary-teal);
+  background-color: rgba(21, 146, 164, 0.1);
+  padding: 8px;
+  border-radius: 8px;
 }
 
-.close-menu {
-  position: absolute;
-  top: 25px;
-  right: 25px;
-  background: none;
-  border: none;
-  color: var(--white);
-  font-size: 2rem;
-  cursor: pointer;
+.drawer-footer {
+  padding: 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #f9f9f9;
+}
+
+.drawer-flag {
+  height: 20px;
+  width: auto;
+}
+
+.drawer-footer p {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #666;
 }

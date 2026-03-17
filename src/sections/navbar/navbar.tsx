@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './navbar.css';
 import logo from '../../assets/Asset 2@4x.png';
+import logo2 from '../../assets/Asset 10@4x.png';
 import flag from '../../assets/Asset 3@4x.png';
 import { Link } from 'react-router-dom';
 
@@ -57,7 +58,7 @@ export default function Navbar() {
   return (
     <nav className={`navbar-container ${scrolled ? 'scrolled' : ''}`}>
       {/* Announcement Bar */}
-      <div className="announcement-bar">
+      <div className="announcement-bar mt-2">
         PREMIUM SUPPLEMENTS ENGINEERED FOR EXCELLENCE
       </div>
 
@@ -94,38 +95,57 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu Drawer */}
       <AnimatePresence>
         {isMenuOpen && (
-          <motion.div
-            className="mobile-menu-overlay"
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-          >
-            <button className="close-menu" onClick={toggleMenu}>
-              &times;
-            </button>
-            {navLinks.map((link) => (
-              <motion.div
-                key={link.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-                style={{ width: '100%', textAlign: 'center' }}
-              >
-                <Link
-                  to={link.href}
-                  className="mobile-nav-link"
-                  onClick={toggleMenu}
-                >
-                  <span className="mobile-link-icon">{link.icon}</span>
-                  {link.title}
-                </Link>
-              </motion.div>
-            ))}
-          </motion.div>
+          <>
+            {/* Backdrop */}
+            <motion.div
+              className="mobile-menu-backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={toggleMenu}
+            />
+            
+            <motion.div
+              className="mobile-menu-drawer"
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            >
+              <div className="drawer-header">
+                <img src={logo2} alt="Logo" className="drawer-logo" />
+                <button className="drawer-close" onClick={toggleMenu}>&times;</button>
+              </div>
+
+              <div className="drawer-links">
+                {navLinks.map((link, index) => (
+                  <motion.div
+                    key={link.title}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 * index }}
+                  >
+                    <Link
+                      to={link.href}
+                      className="mobile-nav-link"
+                      onClick={toggleMenu}
+                    >
+                      <span className="mobile-link-icon">{link.icon}</span>
+                      <span className="mobile-link-text">{link.title}</span>
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+
+              <div className="drawer-footer">
+                <img src={flag} alt="UK" className="drawer-flag" />
+                <p>Wegon Nutrition UK</p>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </nav>

@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Autoplay, EffectFade } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/effect-fade'
 import './ourProducts.css'
 
 const categories = ["PROTEINS", "RECOVERY", "VITAMINS", "ENERGY"]
@@ -63,8 +67,32 @@ export default function OurProducts() {
         return () => window.removeEventListener('changeProductCategory', handleCategoryChange);
     }, []);
 
+    const getScaleFromWeight = (weight: string) => {
+        if (!weight) return 1;
+
+        // استخراج الرقم من النص (مثلاً "2.27KG" تصبح 2.27)
+        const numericWeight = parseFloat(weight);
+        if (isNaN(numericWeight)) return 1;
+
+        // تحويل كل الأوزان لجرام لتوحيد المقارنة
+        const isKg = weight.toLowerCase().includes('kg');
+        const grams = isKg ? numericWeight * 1000 : numericWeight;
+
+        // تحديد النطاق: أصغر وزن 300 جرام وأكبر وزن 5000 جرام
+        // السكيل سيتراوح بين 0.65 للعلب الصغيرة و 1.1 للكبيرة جداً
+        const minGrams = 300;
+        const maxGrams = 5000;
+        const minScale = 0.8;
+        const maxScale = 2;
+
+        let scale = minScale + ((grams - minGrams) * (maxScale - minScale) / (maxGrams - minGrams));
+
+        // حصر القيمة بين مينيوم وماكسيموم لضمان جمالية التصميم
+        return Math.min(Math.max(scale, 0.65), 1.1);
+    };
+
     const filteredProducts = allProducts.filter(
-        (product) => product.category_name === activeCategory && product.unique_img
+        (product) => product.category_name === activeCategory
     )
 
     return (
@@ -112,12 +140,45 @@ export default function OurProducts() {
                                     style={{ cursor: "pointer" }}
                                 >
                                     <div className="our-product-image-wrapper">
-                                        <motion.img
-                                            src={product.unique_img || (product.flavors && product.flavors.length > 0 ? product.flavors[0].img_url : '')}
-                                            alt={product.name}
-                                            whileHover={{ scale: 1.05 }}
-                                            transition={{ duration: 0.4 }}
-                                        />
+                                        {product.flavors && product.flavors.length > 0 ? (
+                                            <Swiper
+                                                modules={[Autoplay, EffectFade]}
+                                                effect="fade"
+                                                fadeEffect={{ crossFade: true }}
+                                                autoplay={{
+                                                    delay: 2500 + Math.random() * 1000,
+                                                    disableOnInteraction: false,
+                                                }}
+                                                loop={true}
+                                                className="our-product-swiper"
+                                                allowTouchMove={false}
+                                            >
+                                                {product.flavors.map((flavor, index) => {
+                                                    const baseScale = getScaleFromWeight(product.weight);
+                                                    return (
+                                                        <SwiperSlide key={`${product.id}-${index}`}>
+                                                            <motion.img
+                                                                src={flavor.img_url}
+                                                                alt={`${product.name} - ${flavor.flavor_name}`}
+                                                                initial={{ scale: baseScale }}
+                                                                animate={{ scale: baseScale }}
+                                                                whileHover={{ scale: baseScale * 1.05 }}
+                                                                transition={{ duration: 0.4 }}
+                                                            />
+                                                        </SwiperSlide>
+                                                    );
+                                                })}
+                                            </Swiper>
+                                        ) : (
+                                            <motion.img
+                                                src={product.unique_img || ''}
+                                                alt={product.name}
+                                                initial={{ scale: getScaleFromWeight(product.weight) }}
+                                                animate={{ scale: getScaleFromWeight(product.weight) }}
+                                                whileHover={{ scale: getScaleFromWeight(product.weight) * 1.05 }}
+                                                transition={{ duration: 0.4 }}
+                                            />
+                                        )}
                                     </div>
                                     <div className="our-product-info">
                                         <h3 className="our-product-name">{product.name}</h3>

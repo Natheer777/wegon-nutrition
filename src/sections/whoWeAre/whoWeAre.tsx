@@ -74,7 +74,7 @@ const gridItems: GridItem[] = [
   },
   {
     image: imgWho3,
-    navigateTo: '/product/9'
+    navigateTo: '/product/8'
   },
   {
     image: imgWho4,

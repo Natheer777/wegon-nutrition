@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, EffectFade } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/effect-fade';
 import './allProducts.css';
 
 interface Flavor {
@@ -159,19 +163,49 @@ export default function AllProducts() {
                     whileHover="hover"
                   >
                     <div className="ap-image-wrapper">
-                      {imgSource ? (
-                        <motion.img 
-                          src={imgSource} 
-                          alt={product.name}
-                          className="ap-image"
-                          initial={{ scale: baseScale }}
-                          animate={{ scale: baseScale }}
-                          variants={{
-                            hover: { scale: baseScale * 1.08, transition: { duration: 0.4 } }
+                      {product.flavors && product.flavors.length > 0 ? (
+                        <Swiper
+                          modules={[Autoplay, EffectFade]}
+                          effect="fade"
+                          fadeEffect={{ crossFade: true }}
+                          autoplay={{
+                            delay: 2500 + Math.random() * 1000,
+                            disableOnInteraction: false,
                           }}
-                        />
+                          loop={true}
+                          className="ap-image-swiper"
+                          allowTouchMove={false}
+                        >
+                          {product.flavors.map((flavor, index) => (
+                            <SwiperSlide key={`${product.id}-${index}`}>
+                              <motion.img
+                                src={flavor.img_url}
+                                alt={`${product.name} - ${flavor.flavor_name}`}
+                                className="ap-image"
+                                initial={{ scale: baseScale }}
+                                animate={{ scale: baseScale }}
+                                variants={{
+                                  hover: { scale: baseScale * 1.08, transition: { duration: 0.4 } }
+                                }}
+                              />
+                            </SwiperSlide>
+                          ))}
+                        </Swiper>
                       ) : (
-                        <div className="ap-no-image">No Image</div>
+                        imgSource ? (
+                          <motion.img 
+                            src={imgSource} 
+                            alt={product.name}
+                            className="ap-image"
+                            initial={{ scale: baseScale }}
+                            animate={{ scale: baseScale }}
+                            variants={{
+                              hover: { scale: baseScale * 1.08, transition: { duration: 0.4 } }
+                            }}
+                          />
+                        ) : (
+                          <div className="ap-no-image">No Image</div>
+                        )
                       )}
                       
                       {/* Category Badge overlay */}
