@@ -58,7 +58,8 @@ export default function Navbar() {
   return (
     <nav className={`navbar-container ${scrolled ? 'scrolled' : ''}`}>
       {/* Announcement Bar */}
-      <div className="announcement-bar mt-2">
+      <div className="announcement-bar pt-4 pb-3">
+        
         PREMIUM SUPPLEMENTS ENGINEERED FOR EXCELLENCE
       </div>
 

@@ -19,7 +19,7 @@
 }
 
 .navbar-container.scrolled {
-  transform: translateY(-40px);
+  transform: translateY(-50px);
   /* Exactly the height of the announcement bar */
 }
 
@@ -45,7 +45,7 @@
   letter-spacing: 1px;
   text-transform: uppercase;
   border-bottom: 5px solid white;
-  height: 40px;
+  height: 50px;
   /* Fixed height for reliable transform */
   display: flex;
   align-items: center;

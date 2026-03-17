@@ -91,6 +91,19 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .slides-wrapper {
+    padding-left: 80%;
+    /* Increased from 56.25% */
+  }
+
+  .slide img {
+    object-position: right center;
+    width: 140%;
+  }
+  .slides-wrapper{
+    padding-bottom: 78%;
+  }
+
   .slider-btn {
     font-size: 18px;
     padding: 10px 12px;

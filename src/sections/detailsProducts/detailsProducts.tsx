@@ -36,6 +36,7 @@ export default function DetailsProducts() {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedFlavorIndex, setSelectedFlavorIndex] = useState<number>(0);
+  const [swiperInstance, setSwiperInstance] = useState<any>(null);
 
   useEffect(() => {
     const fetchProductDetails = async () => {
@@ -144,11 +145,13 @@ export default function DetailsProducts() {
               modules={[Autoplay, EffectFade]}
               effect="fade"
               fadeEffect={{ crossFade: true }}
-              autoplay={{
+              autoplay={product.category_name === "VITAMINS" ? {
                 delay: 3000,
                 disableOnInteraction: false,
-              }}
+              } : false}
               loop={true}
+              onSwiper={setSwiperInstance}
+              onSlideChange={(swiper) => setSelectedFlavorIndex(swiper.realIndex)}
               className="details-product-swiper"
             >
               {product.flavors.map((flavor, index) => {
@@ -223,7 +226,11 @@ export default function DetailsProducts() {
                 <select 
                   className="details-flavors-select"
                   value={selectedFlavorIndex}
-                  onChange={(e) => setSelectedFlavorIndex(Number(e.target.value))}
+                  onChange={(e) => {
+                    const index = Number(e.target.value);
+                    setSelectedFlavorIndex(index);
+                    swiperInstance?.slideToLoop(index);
+                  }}
                 >
                   {product.flavors.map((flavor, index) => (
                     <option key={index} value={index}>

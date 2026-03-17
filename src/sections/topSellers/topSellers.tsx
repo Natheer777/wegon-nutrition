@@ -18,6 +18,7 @@ export default function TopSellers() {
   const [products, setProducts] = useState<Product[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [swiperInstance, setSwiperInstance] = useState<any>(null);
 
   useEffect(() => {
     const fetchTopSellers = async () => {
@@ -27,7 +28,7 @@ export default function TopSellers() {
         if (result.success && result.data) {
           // التصفية للمنتجات التي لديها unique_img فقط
           const filtered = result.data.filter((p: any) => p.unique_img && p.unique_img.trim() !== "");
-          setProducts(filtered);
+          setProducts(filtered.slice(0, 6));
         }
       } catch (error) {
         console.error("Error fetching top sellers:", error);
@@ -84,8 +85,9 @@ export default function TopSellers() {
                 <span
                   key={p.id}
                   className={`page-num ${index === activeIndex ? 'active' : ''}`}
+                  onClick={() => swiperInstance?.slideToLoop(index)}
                 >
-                  {index + 1}
+                  {(index + 1).toString().padStart(2)}
                 </span>
               ))}
             </div>
@@ -119,10 +121,11 @@ export default function TopSellers() {
                 delay: 3500,
                 disableOnInteraction: false,
               }}
-              loop={products.length > 4}
+              loop={true}
               spaceBetween={20}
               slidesPerView={1.2}
-              onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
+              onSwiper={setSwiperInstance}
+              onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
               breakpoints={{
                 480: { slidesPerView: 1.5, spaceBetween: 20 },
                 768: { slidesPerView: 2.5, spaceBetween: 30 },
